@@ -1,6 +1,6 @@
 # MiND 团队数据集
 
-**状态：附件仍在上传和校验，尚未正式发布。**
+**状态：完整数据已发布。全部 769 个附件均通过服务端 SHA-256 校验；可还原全部 3,512 个原文件，本地原文件内容保持不变。**
 
 正式发布后访问：https://github.com/bykarl/MRI-classification/releases/tag/mind-ds007857-v1.0.1-team-20261028
 
