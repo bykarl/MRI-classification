@@ -1,0 +1,87 @@
+name: Mirror verified MiND MRI assets
+on:
+  workflow_dispatch:
+    inputs:
+      release_id:
+        description: Existing draft Release ID
+        required: true
+      manifest_sha256:
+        description: Exact SHA256 of the team's dataset_manifest.json
+        required: true
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5]
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPOSITORY: ${{ github.repository }}
+      RELEASE_ID: ${{ inputs.release_id }}
+      MANIFEST_SHA256: ${{ inputs.manifest_sha256 }}
+      SHARD: ${{ matrix.shard }}
+    steps:
+      - name: Copy original MRI bytes and verify source and server SHA256
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,subprocess,tempfile,time,urllib.request
+          from pathlib import Path
+          from urllib.parse import quote
+          repo=os.environ['REPOSITORY']; rid=int(os.environ['RELEASE_ID']); shard=int(os.environ['SHARD'])
+          assert repo=='bykarl/MRI-classification'
+          def gh(args,check=True):
+              p=subprocess.run(['gh']+args,capture_output=True,timeout=600)
+              if check and p.returncode:raise RuntimeError(p.stderr.decode(errors='replace')[-1500:])
+              return p
+          def assets():
+              p=gh(['api','--paginate',f'repos/{repo}/releases/{rid}/assets?per_page=100','--jq','.[] | {name,size,digest,state,id}'])
+              return {r['name']:r for r in (json.loads(line) for line in p.stdout.splitlines() if line.strip())}
+          def match(remote,item):
+              return remote.get('state')=='uploaded' and remote['size']==item['bytes'] and remote.get('digest')=='sha256:'+item['sha256']
+          initial=assets(); info=initial['dataset_manifest.json']
+          manifest_bytes=gh(['api',f"repos/{repo}/releases/assets/{info['id']}",'-H','Accept: application/octet-stream']).stdout
+          assert hashlib.sha256(manifest_bytes).hexdigest()==os.environ['MANIFEST_SHA256'],'Manifest SHA256 mismatch'
+          manifest=json.loads(manifest_bytes)
+          items=sorted([r for r in manifest['files'] if r['storage']=='release_asset'],key=lambda r:r['bytes'],reverse=True)[shard::6]
+          print(f'Shard {shard}: {len(items)} MRI assets',flush=True)
+          with tempfile.TemporaryDirectory() as tmp:
+              for n,item in enumerate(items,1):
+                  name=item['asset_name']; remote=initial.get(name)
+                  if remote:
+                      if not match(remote,item):
+                          for _ in range(24):
+                              time.sleep(5);remote=assets().get(name,{})
+                              if match(remote,item):break
+                          else:raise RuntimeError('Existing asset differs or remains incomplete: '+name)
+                      print(f'[{n}/{len(items)}] Already verified {name}',flush=True);continue
+                  began=time.monotonic();path=Path(tmp)/name
+                  assert item['path'].startswith('rawdata/')
+                  source='https://s3.amazonaws.com/openneuro.org/ds007857/'+quote(item['path'][len('rawdata/'):],safe='/')
+                  for attempt in range(4):
+                      try:
+                          h=hashlib.sha256();count=0
+                          with urllib.request.urlopen(source,timeout=180) as response,path.open('wb') as out:
+                              for block in iter(lambda:response.read(4*1024*1024),b''):out.write(block);h.update(block);count+=len(block)
+                          assert count==item['bytes'] and h.hexdigest()==item['sha256'],'Upstream bytes differ from local pinned MRI: '+name
+                          break
+                      except Exception:
+                          if attempt==3:raise
+                          time.sleep(5*(attempt+1))
+                  p=gh(['api','--method','POST',f'https://uploads.github.com/repos/{repo}/releases/{rid}/assets?name={quote(name,safe="")}',
+                        '-H','Content-Type: application/octet-stream','--input',str(path)],check=False)
+                  remote=json.loads(p.stdout) if not p.returncode else assets().get(name,{})
+                  for _ in range(24):
+                      if match(remote,item):break
+                      if not remote:raise RuntimeError('Upload failed: '+p.stderr.decode(errors='replace')[-1200:])
+                      time.sleep(5);remote=assets().get(name,{})
+                  else:raise RuntimeError('Server SHA256 mismatch or incomplete asset: '+name)
+                  path.unlink()
+                  print(f'[{n}/{len(items)}] Source and server SHA256 verified: {name}',flush=True)
+                  time.sleep(max(0,8-(time.monotonic()-began)))
+          PY
