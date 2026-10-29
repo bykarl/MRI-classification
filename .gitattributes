@@ -1,0 +1,2 @@
+# Dataset manifests pin exact bytes; disable platform newline conversion.
+/dataset_Mi/** -text

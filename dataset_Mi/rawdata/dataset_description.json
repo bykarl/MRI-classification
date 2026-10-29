@@ -1,0 +1,17 @@
+{
+    "Name": "Michigan Neural Distinctiveness (MiND) Study",
+    "BIDSVersion": "1.8.0",
+    "DatasetType": "raw",
+    "License": "CC0",
+    "Authors": [
+        "Thad A. Polk",
+        "Holly Gagnon",
+        "Molly Simmonite"
+    ],
+    "Acknowledgements": "Data collected at the University of Michigan Functional MRI Laboratory.",
+    "HowToAcknowledge": "Please cite Gagnon et al. (2019) BMC Neurology doi:10.1186/s12883-019-1294-6",
+    "ReferencesAndLinks": [
+        "https://doi.org/10.1186/s12883-019-1294-6"
+    ],
+    "DatasetDOI": "doi:10.18112/openneuro.ds007857.v1.0.1"
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "source_dataset": "OpenNeuro ds007857",
+  "source_version": "1.0.1",
+  "source_release_tag": "mind-ds007857-v1.0.1-team-20261028",
+  "source_manifest_sha256": "e65a8526e00315861cdf459138058970da890d3c569ed7837c9fe9fa9f8f05e0",
+  "identity_rule": "The user confirmed that different prefixes with the same numeric ID identify the same person.",
+  "retention_rule": "Keep mindb and remove its matching mindo; mindb has greater recorded age and UHP_post_upgrade scanner metadata in all 50 pairs.",
+  "same_id_sessions": "All original sessions and MRI modalities of each retained ID are preserved.",
+  "identity_evidence_limit": "No independent author-provided cross-ID map was found. The shared-ID identity rule was explicitly confirmed by the user; demographics alone were not used to merge anyone.",
+  "before": {
+    "image_subject_ids": 259,
+    "participants_table_rows": 289,
+    "mri_files": 764,
+    "t1_files": 506,
+    "bold_files": 258,
+    "qc_candidate_rows": 73
+  },
+  "after": {
+    "subject_ids": 209,
+    "groups": {
+      "CN": 160,
+      "MCI": 49
+    },
+    "mri_files": 614,
+    "t1_files": 406,
+    "bold_files": 208,
+    "qc_candidate_rows": 56,
+    "qc_candidate_groups": {
+      "CN": 47,
+      "MCI": 9
+    },
+    "scanner_matched_candidate_rows": 43,
+    "scanner_matched_candidate_groups": {
+      "CN": 35,
+      "MCI": 8
+    },
+    "training_ready_subjects": 0
+  },
+  "removed": {
+    "duplicate_subject_ids": 50,
+    "mri_files": 150,
+    "labels_without_images": 30,
+    "excluded_legacy_and_process_history": true
+  },
+  "cross_session_pair_ids": [
+    "sub-mindm388",
+    "sub-mindo114",
+    "sub-mindo172",
+    "sub-mindo238"
+  ],
+  "t1_only_ids": [
+    "sub-mindm300"
+  ],
+  "label_conflicts": [
+    {
+      "removed_id": "sub-mindo278",
+      "removed_group": "CN",
+      "retained_id": "sub-mindb278",
+      "retained_group": "MCI"
+    }
+  ],
+  "source_release_policy": "The original Release remains the source archive. The current manifest and downloader reconstruct only the cleaned selection.",
+  "quality_status": "Filtering existing preliminary QC records does not constitute new MRI QC or preprocessing."
+}

@@ -1,0 +1,88 @@
+{
+  "age": {
+    "Description": "Age of participant at time of scan",
+    "Units": "years"
+  },
+  "sex": {
+    "Description": "Biological sex of participant",
+    "Levels": {
+      "M": "male",
+      "F": "female"
+    }
+  },
+  "age_category": {
+    "Description": "Coarse age cohort assignment used in study design",
+    "Levels": {
+      "young": "younger adult cohort",
+      "older": "older adult cohort"
+    }
+  },
+  "group": {
+    "Description": "Cognitive status diagnostic group from neuropsychological evaluation",
+    "Levels": {
+      "CN": "Cognitively Normal/Intact",
+      "MCI": "Mild Cognitive Impairment",
+      "DAT": "Dementia of the Alzheimer's Type"
+    }
+  },
+  "education_years": {
+    "Description": "Highest level of education completed, coded as approximate years (e.g., 16=high school graduate, 21=Bachelor's, 22=Master's, 24=Doctorate)",
+    "Units": "years (coded)"
+  },
+  "mothers_education_years": {
+    "Description": "Highest level of education completed by participant's mother, same coding as education_years",
+    "Units": "years (coded)"
+  },
+  "race": {
+    "Description": "Self-reported race",
+    "Levels": {
+      "White": "White",
+      "Black or African American": "Black or African American",
+      "Black or African American and White": "Black or African American and White",
+      "Asian": "Asian",
+      "Asian and White": "Asian and White",
+      "American Indian or Alaska Native": "American Indian or Alaska Native",
+      "Native Hawaiian or Other Pacific Islander": "Native Hawaiian or Other Pacific Islander",
+      "Multiple (Asian, AIAN, White, NHPI)": "Multiple categories: Asian, American Indian or Alaska Native, White, Native Hawaiian or Other Pacific Islander",
+      "Other": "Other",
+      "Not Provided": "Not Provided"
+    }
+  },
+  "ethnicity": {
+    "Description": "Self-reported ethnicity",
+    "Levels": {
+      "Not Hispanic or Latino": "Not Hispanic or Latino",
+      "Hispanic or Latino": "Hispanic or Latino",
+      "Not Provided": "Not Provided"
+    }
+  },
+  "hearing_aid": {
+    "Description": "Whether participant uses a hearing aid",
+    "Levels": {
+      "yes": "uses hearing aid",
+      "no": "does not use hearing aid"
+    }
+  },
+  "music_experience": {
+    "Description": "Whether participant has formal musical training or practice experience",
+    "Levels": {
+      "yes": "has musical experience",
+      "no": "no musical experience"
+    }
+  },
+  "music_years": {
+    "Description": "Total years of musical practice across study waves",
+    "Units": "years"
+  },
+  "moca": {
+    "Description": "Montreal Cognitive Assessment (MoCA) total score at baseline",
+    "Units": "score (max 30)"
+  },
+  "scanner_upgrade": {
+    "Description": "fMRI scanner hardware version at time of scan. The 3T GE scanner was upgraded mid-study from the MR750 platform to the UHP platform; this field flags which version was used and is relevant for cross-subject harmonization.",
+    "Levels": {
+      "MR750_pre_upgrade": "Collected on the original GE Discovery MR750 platform (pre-upgrade)",
+      "UHP_post_upgrade": "Collected after upgrade to the UHP platform"
+    }
+  }
+}
