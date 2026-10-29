@@ -14,7 +14,7 @@
 - `SHA256SUMS.txt`：Release 附件的校验值。
 - 数据来源：OpenNeuro ds007857，版本 1.0.1；源数据声明 CC0。请引用上游数据集及相关研究；配套第三方软件遵循其自带许可。
 
-## 组员推荐操作
+## 推荐操作
 
 1. 安装 Python 3.8 或更新版本。
 2. 下载本 Release 的 `download_dataset.py`。
