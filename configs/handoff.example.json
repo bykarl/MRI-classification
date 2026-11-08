@@ -1,0 +1,43 @@
+{
+  "record_id": "sub-mindo304_ses-placebo",
+  "pipeline_id": null,
+  "stages": {
+    "t1": {
+      "status": "pending",
+      "qc_status": "pending",
+      "qc_reviewer": null,
+      "template_sha256": null,
+      "files": {
+        "processed_t1": {"path": "t1/processed.nii.gz", "sha256": null},
+        "brain_mask": {"path": "t1/brain_mask.nii.gz", "sha256": null},
+        "transform": {"path": "t1/registration_transform.txt", "sha256": null},
+        "qc_image": {"path": "qc/t1_registration.png", "sha256": null}
+      }
+    },
+    "structure": {
+      "status": "pending",
+      "qc_status": "pending",
+      "qc_reviewer": null,
+      "icv_mm3": null,
+      "icv_method": null,
+      "freesurfer_version": null,
+      "files": {
+        "lh_aparc": {"path": "t1/stats/lh.aparc.stats", "sha256": null},
+        "rh_aparc": {"path": "t1/stats/rh.aparc.stats", "sha256": null},
+        "aseg": {"path": "t1/stats/aseg.stats", "sha256": null}
+      }
+    },
+    "fmri": {
+      "status": "pending",
+      "qc_status": "pending",
+      "qc_reviewer": null,
+      "files": {
+        "roi_timeseries": {"path": "fmri/roi_timeseries_clean.npy", "sha256": null},
+        "roi_order": {"path": "fmri/roi_order.tsv", "sha256": null},
+        "motion": {"path": "fmri/motion.tsv", "sha256": null},
+        "window": {"path": "fmri/window.json", "sha256": null},
+        "qc_image": {"path": "qc/fmri_motion.png", "sha256": null}
+      }
+    }
+  }
+}

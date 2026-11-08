@@ -1,0 +1,8 @@
+# Candidate pilot environment, not yet verified with real checkpoint/input.
+# Install torch in a separate Colab environment; do not install over Brain-JEPA.
+torch==2.5.1
+monai==1.3.2
+nibabel==5.2.1
+numpy==1.26.4
+PyYAML==6.0.2
+einops==0.8.0

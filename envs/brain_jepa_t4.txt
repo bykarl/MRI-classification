@@ -1,0 +1,6 @@
+# Minimal independent frozen inference candidate, not the author's training env.
+# Normal attention only; the pinned upstream unconditional flash import is
+# replaced in memory by mri_pipeline.jepa_compat. No flash/timm training code.
+torch==2.5.1
+numpy==1.26.4
+PyYAML==6.0.2

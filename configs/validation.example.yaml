@@ -1,0 +1,15 @@
+# Deliberately unset: choose folds only after real QC/identity review.
+outer_folds: null
+inner_folds: null
+crossfit_folds: null
+repeats: null
+seed: 42
+paired_selection_rule: null  # candidate implementation: mean_inner_U_R_auc
+decision_confirmed: false
+candidates:
+  - logistic_c: 1.0
+    ridge_alpha: 10.0
+    width: 8
+    epochs: 200
+    learning_rate: 0.01
+    mlp_l2: 0.001

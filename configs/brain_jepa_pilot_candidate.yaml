@@ -1,0 +1,14 @@
+# Reviewable technical pilot proposal only; not loaded automatically.
+code_commit: b1dfa93eb331d1e70476446b06fc8a1ac3c92345
+checkpoint_sha256: f1726142b96b4c809a90786b79b8029b77cef0aacc231d1a357940cbec9442ac
+checkpoint_key: encoder
+attention_backend: normal_no_flash
+normalization: global_sample_standardization
+pooling: mean_tokens
+gradient_sha256: c9bc667e49aae442e12607bee8be86c31c330f2844cf72e7c84b16de312ed007
+atlas_contract: null
+recipe_confirmed: false
+note: >-
+  Candidate for a technical pilot after ROI order and QC confirmation, not an
+  exact reproduction of the author's robust-scaled/downsampled pretraining.
+  No external cohort normalization statistics were found or fabricated.

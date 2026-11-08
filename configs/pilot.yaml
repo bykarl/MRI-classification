@@ -1,0 +1,32 @@
+source_commit: 7bc3e6fc3c9685cc713ea4288705a63740ef2bd6
+manifest_sha256: 8c36e85113f3a5b5e853b471f664397c74ed79eca71e014cd198aa82076da0a2
+pilot_manifest: manifests/pilot_subjects.csv
+feature_set_id: pilot_v1
+brainiac:
+  code_commit: ba60f45bed832ee0e5683c678caeaeefe2072f0d
+  checkpoint_sha256: null
+  template_sha256: null
+  input_recipe_confirmed: false
+  pooling: author_first_token
+brain_jepa:
+  code_commit: b1dfa93eb331d1e70476446b06fc8a1ac3c92345
+  attention_backend: null  # normal_no_flash requires the audited pinned author file
+  checkpoint_sha256: null
+  checkpoint_key: null  # explicitly choose encoder or target_encoder
+  atlas_contract: null
+  gradient_csv: null
+  gradient_sha256: null
+  normalization: null  # global_sample_standardization or frozen_roi_robust
+  normalization_params: null
+  normalization_params_sha256: null
+  pooling: null  # mean_tokens or first_token; must be confirmed
+  recipe_confirmed: false
+fmri:
+  window_frames: 160
+  fisher_clip_epsilon: 0.000001
+  fd_definition: null
+  fd_threshold_mm: null
+  discarded_initial_frames: null
+  filter_band_hz: null
+  acompcor_components: null
+  explicit_gsr: false

@@ -1,0 +1,99 @@
+{
+  "utc_stamp": "20261108_110935_1794136175552854375",
+  "patient_data_used": false,
+  "training": false,
+  "assets": {
+    "brainiac": {
+      "path": "/content/drive/MyDrive/FYP_MRI/weights/brainiac/BrainIAC.ckpt",
+      "size_bytes": 362119240,
+      "sha256": "f22bdbcae26823a9d9e8aee883c6f24386ba4617339c12269848b6666cc62693",
+      "source": "https://www.dropbox.com/scl/fo/i51xt63roognvt7vuslbl/AMblt6reQVvlSrORTB3_2lE/BrainIAC.ckpt?rlkey=9w55le6tslwxlfz6c0viylmjb&dl=1"
+    },
+    "brainiac_template": {
+      "path": "/content/drive/MyDrive/FYP_MRI/weights/reference/brainiac_temp_head.nii.gz",
+      "size_bytes": 11976113,
+      "sha256": "d8eba10e9528a5212b78fb1be477d5e8229751bfec5e1e1a648dc81ff83a622e",
+      "source": "https://raw.githubusercontent.com/AIM-KannLab/BrainIAC/ba60f45bed832ee0e5683c678caeaeefe2072f0d/src/preprocessing/atlases/temp_head.nii.gz"
+    },
+    "jepa_gradient": {
+      "path": "/content/drive/MyDrive/FYP_MRI/weights/brain_jepa/gradient_mapping_450.csv",
+      "size_bytes": 344558,
+      "sha256": "c9bc667e49aae442e12607bee8be86c31c330f2844cf72e7c84b16de312ed007",
+      "source": "https://raw.githubusercontent.com/Eric-LRL/Brain-JEPA/b1dfa93eb331d1e70476446b06fc8a1ac3c92345/data/gradient_mapping_450.csv"
+    },
+    "brain_jepa": {
+      "path": "/content/drive/MyDrive/FYP_MRI/weights/brain_jepa/jepa-ep300.pth.tar",
+      "size_bytes": 1513861285,
+      "sha256": "f1726142b96b4c809a90786b79b8029b77cef0aacc231d1a357940cbec9442ac",
+      "source": "https://drive.usercontent.google.com/uc?id=1LL3gM-i5SLDWCFyvj71M3peLeU6V2qMR&export=download"
+    }
+  },
+  "brainiac_check": {
+    "test": "SYNTHETIC_ONLY",
+    "strict_backbone_load": true,
+    "shape": [
+      1,
+      768
+    ],
+    "finite": true,
+    "template_shape": [
+      170,
+      206,
+      162
+    ],
+    "template_axcodes": [
+      "L",
+      "A",
+      "S"
+    ],
+    "template_spacing": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "brain_jepa_check": {
+    "test": "SYNTHETIC_ONLY",
+    "attention": "author_normal_import_only_compat",
+    "torch": "2.5.1+cu124",
+    "gpu": "Tesla T4",
+    "gradient_shape": [
+      450,
+      30
+    ],
+    "branches": [
+      {
+        "branch": "encoder",
+        "strict_load": true,
+        "token_shape": [
+          1,
+          4500,
+          768
+        ],
+        "finite": true
+      },
+      {
+        "branch": "target_encoder",
+        "strict_load": true,
+        "token_shape": [
+          1,
+          4500,
+          768
+        ],
+        "finite": true
+      }
+    ],
+    "normalization_confirmed": false,
+    "pooling_confirmed": false
+  },
+  "brain_jepa_license": "No root LICENSE at pinned commit; do not assume a license or redistribute weights.",
+  "configuration_backup": "/content/drive/MyDrive/FYP_MRI/artifacts/configs/ye_boyang/assets_20261108_110935_1794136175552854375",
+  "provenance": {
+    "base_commit": "7bc3e6fc3c9685cc713ea4288705a63740ef2bd6",
+    "branch": "karl",
+    "brainiac_commit": "ba60f45bed832ee0e5683c678caeaeefe2072f0d",
+    "brain_jepa_commit": "b1dfa93eb331d1e70476446b06fc8a1ac3c92345",
+    "saved_notebook": "notebooks/01b_encoder_assets_check.ipynb",
+    "notice": "Actual asset hashes and synthetic compatibility only; no patient features, QC approval or classification results."
+  }
+}

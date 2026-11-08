@@ -1,0 +1,10 @@
+{
+  "confirmed": false,
+  "atlas_name": null,
+  "atlas_space": null,
+  "atlas_sha256": null,
+  "roi_order_sha256": null,
+  "gradient_sha256": null,
+  "roi_labels": [],
+  "note": "Must contain the true 450 labels in author order; empty is intentional, not a usable atlas."
+}

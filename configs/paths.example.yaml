@@ -1,0 +1,8 @@
+code_root: null
+data_root: null
+artifact_root: null
+brainiac_repo: null
+brain_jepa_repo: null
+brainiac_checkpoint: null
+brain_jepa_checkpoint: null
+# Copy to paths.local.yaml (ignored). Do not assume another person's Drive path.
