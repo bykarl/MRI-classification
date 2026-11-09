@@ -264,3 +264,15 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 重新检查：仍在 karl、HEAD 仍为基准、已暂存 58 项、工作树无未暂存修改、cached diff --check 通过。此前 26 项核心回归通过，秘密/大文件/忽略项审阅与 EOF 修正见 CHG-0011/0012，未因身份配置重跑训练。
 - 本日志补充身份阻塞解除；将随本次源码提交，不预写自身 SHA。实际提交/推送结果以 Git 历史及远端核验为准。权重、MRI、私人路径配置、虚拟环境和缓存仍不入 Git。
 - 回退：如需撤销仓库级作者配置，可仅移除本仓库的两项 identity 配置；不改全局或平台账号。发布后如需撤销源码，以独立 revert 提交处理，禁止为回退强推 main/karl。
+
+## CHG-0014 — Li Yang 首例接收检查与空间信息收尾
+
+- 时间：2026-11-09，最终真实 Colab 收尾运行时间 23:12（Asia/Shanghai，UTC+08:00）；执行者 Codex，范围为用户要求完成第一步、保留预处理工作到其独立分支。
+- 分支：li-yang-preprocessing；基准提交 a911ab6b2120698fdf48f1936c7bf7c5c1a17a4a。通过 GitHub 工具读取当前分支，未使用本地 checkout；更新将携带 expected_sha，拒绝覆盖并发改动，不修改 main/karl，不强推。本条随本次源码提交，不预写自身提交号。
+- 新增 scripts/close_first_record_intake.py：仅针对 sub-mindo304_ses-placebo，绑定原始 OpenNeuro 提交/annex SHA-256 和匹配 JSON；检查继承元数据、TR 和形状。保留原始文件，在 intake_v2 副本按原 coded sform 明确 pixdim/mm/sec/TR，停用不能无损表达原矩阵的 qform；实际验证原始和缩放后体素完全相同、世界 affine 保持、原始哈希不变，无重采样。
+- 新增 notebooks/01_liyang_intake_check.ipynb：来自已执行的私人 Colab Notebook，保留实际文本输出，清除 Colab 账户元数据、下载 JavaScript 和内嵌预览；没有伪造执行结果。原完整预览/历史检查保留于报告包。新增 docs/STEP1_CLOSEOUT.md 和 reports/intake/sub-mindo304_step1_closeout.json（实际输出、路径转为项目相对路径）；AGENTS.md 补充双方分支归属。
+- 依据与限制：原始 BOLD pixdim x=2 与 sform 3.4375、JSON VoxelSize=3 均保留审计。研究方案 FOV 220 mm / 64 矩阵支持 sform 间距；此为有依据的首例技术试跑策略，不是个体 DICOM/扫描作者确认，不扩展成全队列自动修复。原 T1 qform/sform 不同本身不证明损坏。
+- 真实运行：初始严格 qform 写入因轻微非正交成分失败；改用保留完整 sform、qform_code=0 后，Notebook execution_count=10 实际通过（约 9.7 秒），最后摘要 execution_count=11。不把失败尝试或输入副本整理称为完成了 N4/脑提取/配准/FreeSurfer/去噪。
+- 验证：所有共享 Notebook 代码单元 AST 解析通过，无 error 输出；最终脚本与实际执行 Notebook 函数前缀逐字节一致。报告 ZIP SHA-256 901aca7331c13778619675a86669c810407ff759892dbdb121b5c5812e887062；最终 T1 副本 SHA-256 8e6d3104d6171e3528aefe6288357f8cfee97724f0044232bac7c2fd3641dccb，BOLD 副本 a4bf9ceeccaab0978bc9f8927ddec63eff23ff5c436e9881c82004c66e31d747。未执行正式模型、训练或与本次无关的回归测试。
+- SliceTiming 无可靠继承/逐例记录，原 slice_code=0，因此跳过 STC，不造参数；该 session 无场图，不声称完成实测场图 SDC。软件安装、持久计算检查点、模型模板配方、fMRI 去噪/QC 与确切 ROI 契约属于下一阶段要求；QC pending，training_ready=False，身份和诊断时点仍未验证。
+- 保存/回退：代码及小型证据进入本分支，权重/MRI 不入 Git。原始和副本 MRI 仍在 Colab 临时磁盘，持久保留报告与可重建代码，不冒充已备份影像。若采用新空间策略，新增版本并保留原记录；若需撤销源码，用独立 revert 提交，不改写 main/karl 历史、不删除原始文件/私人 Drive 内容。
