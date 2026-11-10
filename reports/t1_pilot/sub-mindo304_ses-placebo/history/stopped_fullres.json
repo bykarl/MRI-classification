@@ -1,0 +1,9 @@
+{
+  "record_id": "sub-mindo304_ses-placebo",
+  "run_id": "pilot_20261110T075350Z",
+  "status": "intentionally_stopped_before_n4_completion",
+  "returncode": -15,
+  "reason": "Resource-informed technical pilot change to shrink=2 Otsu foreground field estimation; no OOM or data failure asserted",
+  "stopped_at_utc": "2026-11-10T07:58:59.468819+00:00",
+  "completed_stages": []
+}

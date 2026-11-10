@@ -1,0 +1,68 @@
+{
+  "record_id": "sub-mindo304_ses-placebo",
+  "run_id": "pilot_resume_20261110T080241Z",
+  "started_at_utc": "2026-11-10T08:02:42.951760+00:00",
+  "purpose": "single-case technical pilot; candidate recipe not yet feature-owner accepted",
+  "input_recipe_confirmed": false,
+  "raw_sha256": "89ea431ba0e912d1b73643a4ce691dbe13ad54da394b645942e4e12dceaf73b5",
+  "input_sha256": "8e6d3104d6171e3528aefe6288357f8cfee97724f0044232bac7c2fd3641dccb",
+  "template_sha256": "d8eba10e9528a5212b78fb1be477d5e8229751bfec5e1e1a648dc81ff83a622e",
+  "script_sha256": "9b6962391e6642c056911f484783760527c01127544bc8c231d5201c0d62a529",
+  "software": {
+    "SimpleITK": "2.4.1",
+    "HD_BET": "1.0",
+    "torch": "2.5.1+cpu",
+    "nibabel": "5.3.2",
+    "numpy": "1.26.4"
+  },
+  "order": [
+    "N4_native",
+    "Euler3D_rigid_to_author_template",
+    "legacy_HDBET_fast_tta0"
+  ],
+  "threads": 2,
+  "random_seed": 20261110,
+  "fixed_seed_added_relative_to_author": true,
+  "n4_input_mask": "Otsu foreground, 200 bins; not a brain segmentation mask",
+  "n4_shrink_factor": 2,
+  "n4_recipe_version": "pilot_lowmem_v2",
+  "resume_n4_from": "pilot_lowmem_20261110T075859Z",
+  "registration_input_cast": "sitkFloat32",
+  "n4_change_relative_to_author": "Shrink image and Otsu foreground mask by 2 for field estimation, evaluate field on original grid and divide original image; not identical to author no-mask full-grid call.",
+  "n4_method_reference": "https://simpleitk.readthedocs.io/en/master/link_N4BiasFieldCorrection_docs.html",
+  "registration": {
+    "initializer": "GEOMETRY",
+    "metric": "MattesMutualInformation",
+    "bins": 50,
+    "sampling": "RANDOM",
+    "sampling_fraction": 0.01,
+    "seed": 20261110,
+    "learning_rate": 1.0,
+    "iterations": 100,
+    "convergence_minimum": 1e-06,
+    "convergence_window": 10,
+    "shrink_factors": [
+      4,
+      2,
+      1
+    ],
+    "smoothing_sigmas_mm": [
+      2,
+      1,
+      0
+    ],
+    "interpolator": "linear",
+    "outside_value": 0.0
+  },
+  "hdbet": {
+    "device": "cpu",
+    "mode": "fast",
+    "tta": 0,
+    "postprocess_largest_component": 1,
+    "save_mask": 1
+  },
+  "no_96_cube_resize": true,
+  "no_encoder_intensity_standardization": true,
+  "qc_status": "pending",
+  "training_ready": false
+}

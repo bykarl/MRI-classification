@@ -303,3 +303,16 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 验证：脚本 AST/py_compile 通过；实际首例运行暴露并修复上述像素类型接口问题。CLI、权重严格加载与真实 N4/配准是已运行证据；HD-BET 最终输出/QC PNG/完整 handoff 的结果将另据实际输出追加，不预写。未运行编码器特征、96³ 转换、FreeSurfer、fMRI 处理、分类训练或无关回归。
 - 范围/限制：单例技术预处理；身份与诊断时点仍待核实，配方需要队友审阅，qc_status=pending、training_ready=False。MRI、mask、偏置场、模板、权重和 PNG/大型日志保存在私人项目 Drive，不进入 Git；仅源码、说明和小型审计结果可发布。允许显式复用 N4，不声称支持全部阶段自动恢复。
 - 回退：用独立 revert 只撤销本条涉及的源码/文档变更；保留 CHG-0015 及之前记录、实际历史运行和原始 MRI。禁止为回退清空 Drive、覆盖不同 checkpoint、重置或强推 main/karl。
+
+## CHG-0017 — 首例 2B 完成、最终持久读回与 QC 证据交接
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者 Codex，继续完成用户已授权的 2B。分支 li-yang-preprocessing；基准 8951931a944cdc521d5f43c2adbd69a96ef4f2bb，GitHub API 工作，无本地 checkout。仅更新本分支，expected_sha 防并发覆盖，不改 main/karl，不强推。
+- 新增 scripts/preview_t1_registration.py、scripts/export_t1_pilot_reports.py、docs/T1_PILOT_RESULTS.md；更新 docs/T1_PILOT_RUNBOOK.md 补充已完成结果及实际执行的两个工具。新增 reports/t1_pilot/sub-mindo304_ses-placebo/ 的 SUMMARY、handoff_pilot、三个 stage、run、N4 参数、final_readback 及 history 中的受控终止/类型失败 JSON；本日志追加 CHG-0017。图像/权重/ZIP/PNG 二进制不入 Git。
+- 实际成功运行 pilot_resume_20261110T080241Z 于 2026-11-10T08:26:31Z（16:26:31 Asia/Shanghai）完成，进程 returncode=0。执行源码 SHA-256 9b6962391e6642c056911f484783760527c01127544bc8c231d5201c0d62a529，与已发布处理脚本一致。N4 原计算 62.186 s（续跑复用，本次不重算）、配准 14.140 s、HD-BET CPU fast tta=0 为 1398.175 s。阶段标记与最终 handoff 均由真实输出产生。
+- 输出 T1 brain、binary brain mask、N4/偏置场/前景 mask、参考/初始及最终配准图、双向物理变换、参数/优化轨迹/软件版本/耗时/日志和四张 QC PNG。最终模板网格 170×206×162、1 mm、LAS。原始与 intake_v2 输入 SHA 未变；技术检查包括有限值、shape/affine、二值 mask、mask 内 brain=registered、mask 外为零。
+- export_t1_pilot_reports.py 实际完成独立最终 Drive 读回：24 个文件逐项 SHA-256 一致。报告 ZIP 4,679,927 bytes、SHA-256 ff7ee984ca7556b3fb522970d17980283db7f997d3f8a4d7d30fbe2ff3ade618，包含实际记录/四张 QC PNG/历史尝试/诊断，不含 NIfTI、model/ckpt/权重。通过已显示的报告下载链接取回同字节报告，再核对 SHA、ZIP CRC 和成员路径/排除项；未重新运行预处理来生成“验证结果”。
+- CPU forward 耗时较长；从 PyPI 临时运行只读 py-spy dump（不带 locals），先定位到作者网络末段 3D 卷积，随后到 mask resize/export。没有向目标发送控制信号、调整安全策略或改权重；诊断文本保留在报告/项目 Drive。与 CHG-0016 中主动停止首次 N4 的行为明确区分。
+- Codex 实际查看 input/N4、三方向配准、六张轴位 mask 和九张三方向 mask 抽样视图：暂未见整体严重翻转/错位、大范围脱脑或大块颅骨残留。该结论仅是有限抽样的初步视觉检查，不是全体积专家 QC 或分割准确率；边缘皮层、小脑/下方覆盖和全部边界仍需团队复核。1190.342 ml 仅是该二值 mask 体积，不是 ICV、82 项 FreeSurfer 体积或 GT；没有计算 Dice/AUC。
+- 验证范围：三个处理/导出/预览脚本 AST/py_compile 通过，新增文本 EOF/空白检查通过；预览和导出均有真实成功运行。新增公开源码与元数据检查，不发布 MRI/PNG、模型或凭据。未额外运行无关合成测试、编码器特征、正式训练、FreeSurfer 或 fMRI 处理。
+- 剩余边界：2B 技术图像处理完成；input_recipe_confirmed=false、qc_status=pending、training_ready=false 保留。需队友输入配方接受及后续人工 QC 才能标 T1 正式 ready；身份/诊断时点也未验证。2C、2D 及整个 MRI branch 预处理未完成。
+- 回退：用独立 revert 撤销本条新增/更新的说明、工具或小型记录；保留 CHG-0016、前序源码、实际各尝试和原始 MRI/私人 Drive。不删除历史数据、覆盖不同 checkpoint 或强推其他分支。

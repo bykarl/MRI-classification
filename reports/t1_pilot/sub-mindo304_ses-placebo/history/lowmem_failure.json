@@ -1,0 +1,11 @@
+{
+  "record_id": "sub-mindo304_ses-placebo",
+  "failed_at_utc": "2026-11-10T08:00:07.241698+00:00",
+  "error": "Exception thrown in SimpleITK CenteredTransformInitializer: /tmp/SimpleITK/Code/BasicFilters/src/sitkCenteredTransformInitializerFilter.cxx:90:\nsitk::ERROR: Moving Image parameter for CenteredTransformInitializerFilter doesn't match type or dimension!",
+  "traceback": "Traceback (most recent call last):\n  File \"/content/FYP_MRI_LiYang/preprocess_first_t1.py\", line 229, in main\n    initial=sitk.CenteredTransformInitializer(fixed,corrected,sitk.Euler3DTransform(),sitk.CenteredTransformInitializerFilter.GEOMETRY)\n  File \"/content/FYP_MRI_LiYang/venvs/t1/lib/python3.10/site-packages/SimpleITK/SimpleITK.py\", line 9357, in CenteredTransformInitializer\n    val = _SimpleITK.CenteredTransformInitializer(*args, **kwargs)\nRuntimeError: Exception thrown in SimpleITK CenteredTransformInitializer: /tmp/SimpleITK/Code/BasicFilters/src/sitkCenteredTransformInitializerFilter.cxx:90:\nsitk::ERROR: Moving Image parameter for CenteredTransformInitializerFilter doesn't match type or dimension!\n",
+  "timings": {
+    "n4_seconds": 62.186
+  },
+  "qc_status": "failed_processing",
+  "training_ready": false
+}

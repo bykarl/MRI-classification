@@ -2,6 +2,8 @@
 
 This entry processes only `sub-mindo304_ses-placebo`; it is not a batch/clinical pipeline. Its output remains a candidate input for BrainIAC until QC and the feature-owner handoff review.
 
+**Completed outcome:** continuation exited 0 at 2026-11-10T08:26:31Z. N4 originally took 62.186 s, registration 14.140 s, and CPU HD-BET 1,398.175 s. Final readback matched all 24 persisted files. See [T1_PILOT_RESULTS.md](T1_PILOT_RESULTS.md). Manual QC and feature-owner recipe acceptance remain pending.
+
 ## Preconditions
 
 - Authorized Google Drive mounted at `/content/drive`; the existing `scripts/persist_step2a.py` must have produced a readback checkpoint. On 2026-11-10 it actually verified 25 files / 214,269,339 bytes under `MyDrive/FYP_MRI_LiYang`.
@@ -34,6 +36,8 @@ Use a new run ID, never reuse an existing run directory:
 For an inspected completed low-memory N4 stage, add `--resume-n4-from PRIOR_RUN_ID`. This supports N4 reuse only; it does not automatically resume later registration/HD-BET stages. The destination still needs a new run ID, and both local and persisted source files must be available and hash-matched.
 
 The authorized Colab launcher starts one subprocess and records its PID/log/run ID in `step2b_active.json`. The read-only progress cell checks that same process and its log. Starting the launcher again is not a progress check. Do not run the full notebook with “Run all”: historical cells include downloads, earlier attempts and launchers.
+
+`preview_t1_registration.py` makes a persisted orthogonal alignment contact sheet from completed registration and refuses to overwrite an existing preview. `export_t1_pilot_reports.py` checks the completed final run against Drive and exports review evidence excluding NIfTI and weights. Both utilities actually ran for this first case.
 
 Files live under `derivatives/t1_pilot/sub-mindo304_ses-placebo/<run-id>/` locally and in the mirrored project folder on Drive. Each completed stage is copied and read back with SHA-256 checks before proceeding. Original input files are never overwritten. Existing differing checkpoints or partial copies stop the script for inspection. There is no promise that a Colab runtime survives disconnection; checkpoints preserve completed work. The script refuses reusing a run directory. After an interrupted session, inspect the saved stages before preparing a continuation; the explicit N4-reuse option does not implement general unattended recovery.
 

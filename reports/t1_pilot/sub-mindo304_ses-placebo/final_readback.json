@@ -1,0 +1,130 @@
+{
+  "record_id": "sub-mindo304_ses-placebo",
+  "run_id": "pilot_resume_20261110T080241Z",
+  "checked_at_utc": "2026-11-10T08:28:29.499403+00:00",
+  "final_checkpoint_readback": "pass",
+  "files": [
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/N4_foreground_mask_native.nii.gz",
+      "bytes": 297978,
+      "sha256": "20444792416427347acaf3d8d891c8fed5cd9ab3c9fdb40ca5847900c470b0ae"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/N4_log_bias_native.nii.gz",
+      "bytes": 37178404,
+      "sha256": "6e23c07987f88083596a3c6a1561300bd57c98376fd87370a78b9acb27f46d74"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/T1w_N4_native.nii.gz",
+      "bytes": 40294895,
+      "sha256": "0bc1d1ce434d901fb0c6fbeefbf636f94c9eb5fae85e070d47e2dbe12d41a8ca"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/T1w_brain.nii.gz",
+      "bytes": 4206817,
+      "sha256": "426c356a0209c457800cfc27090567ed9393b10303f09a3f6ffb065ef74f4210"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/T1w_brain_mask.nii.gz",
+      "bytes": 43673,
+      "sha256": "96b5b1e6c1fbddb532361120a24e65ab1f0d4f49317ab0167aab3f915782f535"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/T1w_initial_alignment.nii.gz",
+      "bytes": 16553610,
+      "sha256": "e013fb89cd72c00124f1358a17b853639ba58db4a6ae985a5662fc57dbddf2c8"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/T1w_registered_0000.nii.gz",
+      "bytes": 16349375,
+      "sha256": "754bffe686ddceee2ee92823757c335eca348f4d58fe6f7f10d149ac9b9b69d4"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/executed_script.py",
+      "bytes": 19950,
+      "sha256": "9b6962391e6642c056911f484783760527c01127544bc8c231d5201c0d62a529"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/handoff_pilot.json",
+      "bytes": 4564,
+      "sha256": "5ccc8cd07af9e2f1d04d9e8afee9a4f0f03e0a5702486fd2d3f1f6715c766443"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/hdbet.log",
+      "bytes": 1689,
+      "sha256": "5411c3032529f157a603560a80d026fb68b94354c186228b5f0386f9c595e7f4"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/initial_template_to_native.tfm",
+      "bytes": 191,
+      "sha256": "48fa93c5b7d2eb654ce0aaa20c4ab0e207610f87278d24afc97ddbb2cb8cdf94"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/n4_parameters.json",
+      "bytes": 178,
+      "sha256": "97219f78f94d7e0d2a9fc8a647ddeac8e9a53cf460b43873d1f99ec84f7b3b24"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/native_to_template.tfm",
+      "bytes": 245,
+      "sha256": "8626c6e70bb51a33ec0f90d8db25f22dce73bcb96abaf1f3dd6412b0a698ad57"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/qc_alignment_orthogonal_preview.png",
+      "bytes": 1162099,
+      "sha256": "ad7b65b295cb07c211d4b9ebee0f43aa18cbebcfcd159b7ba800eeeba6430a02"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/qc_mask_orthogonal.png",
+      "bytes": 1160271,
+      "sha256": "536eeb27aa588965ec83758e3450192c42a143d1a0b361731af74c5b3b13e017"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/qc_n4.png",
+      "bytes": 709704,
+      "sha256": "715df1cb8b3bd977c0642c157e7891c4c835612a7a6e1054e47a200c2a18ab5b"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/qc_registration_mask.png",
+      "bytes": 1692994,
+      "sha256": "2e78c6623f9b557c5dbc6f8d39d3194d6d8308060dab852db9d009856baacd10"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/reference_1mm.nii.gz",
+      "bytes": 11952190,
+      "sha256": "eeb6fffbb809009c4e5331030847295ab66002f38dd0f8e4a1a74b2483f9124a"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/registration_trace.json",
+      "bytes": 2623,
+      "sha256": "95c6ed7474b0f988fcfcbf48b9ace3af3dbce4dbd0b63871ed751661a2200542"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/run.json",
+      "bytes": 2255,
+      "sha256": "0e79dff6ad99fc86d869430be2d8f028b4b616079a30193aff77fea0c8caabd8"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/stage_hdbet.json",
+      "bytes": 734,
+      "sha256": "324cd7a33963b2c35eb4a55ef1d33c23d5477c4d5f50c03f6f27dd67ef3cddb6"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/stage_n4.json",
+      "bytes": 254,
+      "sha256": "291216997af42af7aa250372e48b9d4371591fa5e948e60a5b02698e97ab0014"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/stage_registration.json",
+      "bytes": 529,
+      "sha256": "97dc978ada032dc05b4c1a61c52683cceb2dc49ba225a7c4b4605e3892afa47b"
+    },
+    {
+      "path": "derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/template_to_native.tfm",
+      "bytes": 248,
+      "sha256": "a71177fa124a7aaff5d08b4c44f651fa12ca722ef936a58c1cf6f4a601dce7a9"
+    }
+  ],
+  "qc_status": "pending",
+  "training_ready": false
+}

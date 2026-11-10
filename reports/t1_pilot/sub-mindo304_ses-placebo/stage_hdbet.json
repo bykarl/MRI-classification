@@ -1,0 +1,30 @@
+{
+  "stage": "hdbet",
+  "completed_at_utc": "2026-11-10T08:26:20.785343+00:00",
+  "command": [
+    "/content/FYP_MRI_LiYang/venvs/t1/bin/hd-bet",
+    "-i",
+    "/content/FYP_MRI_LiYang/derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/T1w_registered_0000.nii.gz",
+    "-o",
+    "/content/FYP_MRI_LiYang/derivatives/t1_pilot/sub-mindo304_ses-placebo/pilot_resume_20261110T080241Z/T1w_brain.nii.gz",
+    "-mode",
+    "fast",
+    "-tta",
+    "0",
+    "-device",
+    "cpu",
+    "-pp",
+    "1",
+    "-s",
+    "1",
+    "-b",
+    "1",
+    "--overwrite_existing",
+    "0"
+  ],
+  "seconds": 1398.175,
+  "mask_voxels": 1190342,
+  "mask_volume_ml": 1190.342,
+  "technical_checks": "pass",
+  "anatomical_qc": "pending"
+}

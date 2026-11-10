@@ -1,0 +1,15 @@
+{
+  "MaximumNumberOfIterations": [
+    50,
+    50,
+    50,
+    50
+  ],
+  "ConvergenceThreshold": 0.001,
+  "SplineOrder": 3,
+  "NumberOfControlPoints": [
+    4,
+    4,
+    4
+  ]
+}

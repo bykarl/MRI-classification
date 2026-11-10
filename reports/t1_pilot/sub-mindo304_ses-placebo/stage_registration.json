@@ -1,0 +1,12 @@
+{
+  "stage": "registration",
+  "completed_at_utc": "2026-11-10T08:03:00.853099+00:00",
+  "seconds": 14.14,
+  "optimizer_stop": "GradientDescentOptimizerv4Template: Convergence checker passed at iteration 9.",
+  "moving_pixel_type_before_cast": "64-bit float",
+  "moving_pixel_type_used": "32-bit float",
+  "metric_final": -0.3704423083685914,
+  "metric_not_anatomical_QC": true,
+  "transform_direction": "template_to_native maps output/template physical coordinates to input/native for resampling",
+  "anatomical_qc": "pending"
+}

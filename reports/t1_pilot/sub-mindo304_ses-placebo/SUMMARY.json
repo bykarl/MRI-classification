@@ -1,0 +1,35 @@
+{
+  "record_id": "sub-mindo304_ses-placebo",
+  "run_id": "pilot_resume_20261110T080241Z",
+  "result": "T1 technical preprocessing complete; manual anatomical QC and recipe acceptance still required",
+  "n4_seconds_original": 62.186,
+  "timings": {
+    "n4_seconds": 0.0,
+    "reused_n4_original_seconds": 62.186,
+    "registration_seconds": 14.14,
+    "hdbet_seconds": 1398.175
+  },
+  "output_shape": [
+    170,
+    206,
+    162
+  ],
+  "output_spacing_mm": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "output_orientation": [
+    "L",
+    "A",
+    "S"
+  ],
+  "final_checkpoint_readback": "pass",
+  "nifti_and_weights_in_this_zip": false,
+  "input_recipe_confirmed": false,
+  "qc_status": "pending",
+  "training_ready": false,
+  "freesurfer": "not_run",
+  "fmri": "not_run",
+  "classification": "not_run"
+}

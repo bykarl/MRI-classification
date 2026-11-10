@@ -1,0 +1,9 @@
+{
+  "stage": "n4",
+  "completed_at_utc": "2026-11-10T08:02:44.352708+00:00",
+  "seconds": 0.0,
+  "reused_from_run": "pilot_lowmem_20261110T075859Z",
+  "original_compute_seconds": 62.186,
+  "local_drive_hash_checks": "pass",
+  "anatomical_qc": "pending"
+}
