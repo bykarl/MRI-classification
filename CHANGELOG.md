@@ -289,3 +289,17 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 持久保存尚未执行：当前页面停在 Google “Permit this notebook to access your Google Drive files?”。该授权会允许 notebook 代码读写 Drive，等待用户本人授权；persist_step2a.py 只完成本地 AST/语法审查，未冒称已复制/读回。MRI、模板、权重仍是临时磁盘资产，原 Notebook 保存不等于影像备份。
 - 验证：三脚本 AST/py_compile 通过；安装源码 SHA-256 712c07fc59c480632fac36e74ec8e89bac242ce8eba3f300ebd8b24d8a3f77e7，修正后的验证源码 e45f23242670b57eb264525e10759210f523e8d41be3da287af2992fa4e1edde，持久保存源码 29d110a8a09e224ac1f937b7a8333cb1bf500d329ac91fca2e1eaa189cb3e22e。未运行 N4/配准/脑提取/FreeSurfer/fMRI 处理、模型 forward、正式训练或无关回归。
 - 限制/回退：2A 整体仍待 Drive 授权与读回、T1 几何详细结果审阅及队友配方确认。FreeSurfer 安装/许可和 fMRI 工具/契约属于后续子阶段；QC pending、training_ready=False。可通过独立 revert 撤销本次新增代码/文档，保留历史日志及前序源码，不清空原始 MRI/Drive，不强推任何分支。
+
+## CHG-0016 — 2A 持久保存验收，启动并修正首例 2B 候选预处理
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者 Codex；用户授权继续 2B。分支 li-yang-preprocessing，基准 76858889c0ece99b3ba55b3849cbfbd9a09168c9。GitHub API 工作，无本地 checkout；以 expected_sha 更新本分支，不改 main/karl，不强推。
+- 新增 scripts/preprocess_first_t1.py、docs/T1_PILOT_RUNBOOK.md；更新 docs/STEP2A_STATUS.md 追加授权/持久读回实测，保留最初状态为历史快照；本日志追加 CHG-0016。代码是首例技术试跑，不自动设配方、QC 或训练 ready。
+- 2A 补充实测：用户授权后旧 mount 调用曾失败；同一授权重试约 6.6 秒成功。persist_step2a.py 实际执行约 6.1 秒，25 files / 214,269,339 bytes 持久复制和 SHA-256 读回通过。完整验证 JSON 显示 T1 的 SimpleITK read 与 legacy CLI/template/权重检查均 pass；先前 CHG-0015 对读取细节未下结论，此处补齐。
+- 2B 第一尝试 pilot_20261110T075350Z，源码 SHA f750b118813e0885b1f38d5dd5c4910eb8ae3ae2e0f52b9fc9008db48effb3a2：全分辨率无 mask N4 未完成，观测 Colab RAM 指示曾约 10.46/12.67 GB；运行约 5 分钟后为适配资源主动终止，returncode -15。已保留执行源码/参数/进程日志/stopped_attempt.json 并复制读回，不冒称发生 OOM 或影像损坏。
+- 候选 N4 调整为官方 SimpleITK 示例的 Otsu 前景 mask（200 bins）、shrink=2 估计场，再在原始网格计算/应用 log-bias；最终输出保留原分辨率。明确区别于 BrainIAC 作者无 mask 全网格调用，保留候选配方/所有变更；不是原脚本原样复现，不属于数据增强。方法依据 https://simpleitk.readthedocs.io/en/master/link_N4BiasFieldCorrection_docs.html 。
+- 第二尝试 pilot_lowmem_20261110T075859Z，源码 SHA d2a440542d123ba128534bd175f5f4b86f1203a870925336e6aaf64361ccfae7：N4 实际 62.186 秒完成并持久读回；配准初始化随后失败。SimpleITK 偏置场应用产生 64-bit float moving，而 fixed 是 32-bit；失败源码/日志/failure.json/N4 输出均保留。
+- 修复为配准前显式 sitkFloat32 cast；新增 --resume-n4-from，核对前次 input/template 哈希、N4 配方版本/网格及 local/Drive 文件 SHA 后复用已完成 N4，不重算、不覆盖前次目录。续跑 pilot_resume_20261110T080241Z，源码 SHA 9b6962391e6642c056911f484783760527c01127544bc8c231d5201c0d62a529；实际日志证实 moving cast 前是 64-bit。
+- 续跑实际完成 N4 复用与配准、均通过 Drive 读回；配准优化沿用作者框架，额外固定 seed=20261110，保存两方向变换和初始/最终对齐图。当前 HD-BET CPU fast tta=0 正在执行，已到真实影像 forward，尚未将其记为完成或 QC 通过。各阶段不可变目录、校验/失败留档、进度 PID/log 及输出表详见新增 runbook。
+- 验证：脚本 AST/py_compile 通过；实际首例运行暴露并修复上述像素类型接口问题。CLI、权重严格加载与真实 N4/配准是已运行证据；HD-BET 最终输出/QC PNG/完整 handoff 的结果将另据实际输出追加，不预写。未运行编码器特征、96³ 转换、FreeSurfer、fMRI 处理、分类训练或无关回归。
+- 范围/限制：单例技术预处理；身份与诊断时点仍待核实，配方需要队友审阅，qc_status=pending、training_ready=False。MRI、mask、偏置场、模板、权重和 PNG/大型日志保存在私人项目 Drive，不进入 Git；仅源码、说明和小型审计结果可发布。允许显式复用 N4，不声称支持全部阶段自动恢复。
+- 回退：用独立 revert 只撤销本条涉及的源码/文档变更；保留 CHG-0015 及之前记录、实际历史运行和原始 MRI。禁止为回退清空 Drive、覆盖不同 checkpoint、重置或强推 main/karl。

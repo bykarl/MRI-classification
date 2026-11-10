@@ -2,7 +2,16 @@
 
 Record: `sub-mindo304_ses-placebo`. Date: 2026-11-10.
 
-## Actual state
+
+## 2026-11-10 后续实测更新
+
+- 用户完成授权后，原 mount 调用曾返回 `ValueError: mount failed`；重试同一已授权挂载成功，显示 `Mounted at /content/drive`。
+- `persist_step2a.py` 随后真实运行约 6 秒，25 个文件 / 214,269,339 bytes 复制与 SHA-256 读回通过，目录为项目的 `MyDrive/FYP_MRI_LiYang`。
+- 完整验证输出现已核实：T1 `sitk_read=pass`、`t1_itk_read=pass`。故环境、资产读取和首例持久保存的技术前置已具备。
+- 用户进一步授权继续 2B，执行单例候选配方的技术试跑。队友配方接受/正式人工 QC 仍未确认，`input_recipe_confirmed=false` 保留；不将环境验收自动解释为正式输入验收。
+- 下文为最初 2A 检查时的历史状态，包含当时尚未授权的情况。2B 后续 N4 参数/接口修正另见 `T1_PILOT_RUNBOOK.md` 及 CHG-0016；它们不静默覆盖原始 2A 候选记录。
+
+## Initial inspection snapshot
 
 - Colab login recovered with user participation. The runtime is a new CPU-only session: Python 3.13.18 host, 2 logical CPUs, 12.67 GiB RAM; previous temporary MRI files were absent. This does not imply Drive/Git data were deleted.
 - An isolated Python 3.10.22 environment was actually created at `/content/FYP_MRI_LiYang/venvs/t1`. Installation finished successfully in about 23 seconds. The host environment was not replaced.
