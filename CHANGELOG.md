@@ -276,3 +276,16 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 验证：所有共享 Notebook 代码单元 AST 解析通过，无 error 输出；最终脚本与实际执行 Notebook 函数前缀逐字节一致。报告 ZIP SHA-256 901aca7331c13778619675a86669c810407ff759892dbdb121b5c5812e887062；最终 T1 副本 SHA-256 8e6d3104d6171e3528aefe6288357f8cfee97724f0044232bac7c2fd3641dccb，BOLD 副本 a4bf9ceeccaab0978bc9f8927ddec63eff23ff5c436e9881c82004c66e31d747。未执行正式模型、训练或与本次无关的回归测试。
 - SliceTiming 无可靠继承/逐例记录，原 slice_code=0，因此跳过 STC，不造参数；该 session 无场图，不声称完成实测场图 SDC。软件安装、持久计算检查点、模型模板配方、fMRI 去噪/QC 与确切 ROI 契约属于下一阶段要求；QC pending，training_ready=False，身份和诊断时点仍未验证。
 - 保存/回退：代码及小型证据进入本分支，权重/MRI 不入 Git。原始和副本 MRI 仍在 Colab 临时磁盘，持久保留报告与可重建代码，不冒充已备份影像。若采用新空间策略，新增版本并保留原记录；若需撤销源码，用独立 revert 提交，不改写 main/karl 历史、不删除原始文件/私人 Drive 内容。
+
+## CHG-0015 — Li Yang 2A 工具安装与首例资产检查，Drive 授权待完成
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者 Codex，依据用户“完成 2A”的请求。用户手动恢复 Google 登录后继续；不启动 2B/2C/2D 的实际影像预处理。
+- 分支 li-yang-preprocessing；基准 fc31648b8cde9f048a0e8e8506b0e42c1da1daa3。通过 GitHub API 读取分支/日志，未使用本地 checkout；仅发布本分支，不更改 main/karl，以 expected_sha 防止覆盖并发修改。本条随本次提交，不预写自身 SHA。
+- 新增 scripts/install_t1_tools.py、scripts/verify_t1_environment.py、scripts/persist_step2a.py 和 docs/STEP2A_STATUS.md；本日志追加 CHG-0015。脚本分别负责独立工具安装、固定首例资产恢复/工具与权重检查、用户授权挂载后显式项目文件的持久保存。没有上传 MRI/权重/账户信息。
+- 实际 Colab 新 CPU 会话：2 logical CPUs、12.67 GiB RAM，host Python 3.13.18；昨日临时 MRI 不存在，Drive 未挂载。已安装独立 Python 3.10.22、SimpleITK 2.4.1、numpy 1.26.4、scipy 1.14.1、nibabel 5.3.2、scikit-image 0.24.0、matplotlib 3.9.4、torch 2.5.1+cpu 及官方 HD-BET 1.0 提交 3e3d2a5993e8288f2eae928744ffb496cfc7c651；安装四步均成功，约 23 秒。未替换宿主环境。
+- 首次 CLI 验证失败：继承的 MPLBACKEND=module://matplotlib_inline.backend_inline 在独立环境不存在；设置 Agg 后再次运行。旧失败日志/JSON 保留为 attempt1，未写成第一次通过。后续脚本到达最终 JSON：原始及 intake_v2 首例 T1/BOLD 哈希核对、匹配 JSON 恢复、模板读取/哈希、legacy CLI/import 与官方 0.model 的 MD5、strict state_dict load 完成。具体 T1 ITK 读取状态仍以实际 verification.json 为准，不能仅凭脚本无异常推断几何兼容（脚本会记录并保留该类失败）。
+- 权重实测 65,443,735 bytes；Zenodo MD5 46ed703cae7611c4f3a60d7b9d8fd666；SHA-256 6f75233753c4750672815e2b7a86db754995ae44b8f1cd77bccfc37becd2d83c。严格加载检查不含 forward/患者推理。
+- 核查发现 BrainIAC 作者脚本引用的 HD_BET.hd_bet 不在检查的官方 legacy 包中；后续须显式使用已检查的 legacy CLI/run_hd_bet，不能声称原脚本原样可运行，不能静默换成 HD-BET 2.x。T1 候选顺序/模板保留，固定配准种子为拟增加的可复现设置，实际配准未执行，队友配方确认仍待完成。
+- 持久保存尚未执行：当前页面停在 Google “Permit this notebook to access your Google Drive files?”。该授权会允许 notebook 代码读写 Drive，等待用户本人授权；persist_step2a.py 只完成本地 AST/语法审查，未冒称已复制/读回。MRI、模板、权重仍是临时磁盘资产，原 Notebook 保存不等于影像备份。
+- 验证：三脚本 AST/py_compile 通过；安装源码 SHA-256 712c07fc59c480632fac36e74ec8e89bac242ce8eba3f300ebd8b24d8a3f77e7，修正后的验证源码 e45f23242670b57eb264525e10759210f523e8d41be3da287af2992fa4e1edde，持久保存源码 29d110a8a09e224ac1f937b7a8333cb1bf500d329ac91fca2e1eaa189cb3e22e。未运行 N4/配准/脑提取/FreeSurfer/fMRI 处理、模型 forward、正式训练或无关回归。
+- 限制/回退：2A 整体仍待 Drive 授权与读回、T1 几何详细结果审阅及队友配方确认。FreeSurfer 安装/许可和 fMRI 工具/契约属于后续子阶段；QC pending、training_ready=False。可通过独立 revert 撤销本次新增代码/文档，保留历史日志及前序源码，不清空原始 MRI/Drive，不强推任何分支。
