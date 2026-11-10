@@ -1,0 +1,36 @@
+{
+  "record_id": "sub-mindo304_ses-placebo",
+  "observed_at_utc": "2026-11-10T09:49:32.367841+00:00",
+  "evidence": "Actual Colab preparation-only cell output observed in browser; not a FreeSurfer execution",
+  "source_commit": "d8bdfa7a125c9153943081f436eaf13966fea65d",
+  "notebook_commit": "2367ee5855d2ab77b9b39d4abed29c0aa37175e4",
+  "runtime": {
+    "os_id": "ubuntu",
+    "os_version": "24.04",
+    "architecture": "x86_64",
+    "cpu_count": 2,
+    "effective_memory_gib": 12.671398162841797,
+    "available_memory_gib": 11.599071502685547,
+    "free_disk_gib": 105.39901351928711,
+    "avx_present": true,
+    "python": "3.13.18"
+  },
+  "code_snapshot_checks": "pass",
+  "raw_t1_sha256": "89ea431ba0e912d1b73643a4ce691dbe13ad54da394b645942e4e12dceaf73b5",
+  "native_t1_sha256": "8e6d3104d6171e3528aefe6288357f8cfee97724f0044232bac7c2fd3641dccb",
+  "input_hash_checks": "pass",
+  "preparation_report_drive_readback": "pass",
+  "resource_gate_pass": false,
+  "required_effective_memory_gib": 30,
+  "license_present_at_inspection": false,
+  "freesurfer_installed_tested": false,
+  "reconstruction_started": false,
+  "real_stats_generated": false,
+  "qc_status": "pending",
+  "training_ready": false,
+  "limitations": [
+    "This describes the inspected notebook runtime, not any other user runtime.",
+    "Memory threshold is conservative for this pinned candidate recipe, not an empirically measured minimum.",
+    "A saved standalone notebook is an execution entry point, not an installed or validated FreeSurfer environment."
+  ]
+}

@@ -339,3 +339,14 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 实际验证：15个代码格AST语法检查通过；JSON/cell字段及空输出/空执行计数核对。Notebook没有写入伪造执行输出；真实软件安装/重建仍未执行。源码包的15项测试见CHG-0018，不将其冒称本Notebook完整Colab运行。
 - 限制：隔离QC环境和FreeSurfer完整安装需实机验证，Colab当前资源/个人许可仍有门槛；完整阶段归档仅在正常结束后生成。初始Notebook SHA-256 72090e230f126b7f2b82ed6c50fa7a286d71e669664cbd728beb40afd06ff280。
 - 回退：独立revert本Notebook新增，保留已发布源码、历史日志和所有Drive输入/结果，不覆盖旧Notebook或强推。
+
+
+## CHG-0020 — 实测 Colab 源码与输入核验、保存独立运行入口
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者Codex；继续用户“跑之前准备好”授权。分支li-yang-preprocessing，基准2367ee5855d2ab77b9b39d4abed29c0aa37175e4；仅本分支API白名单更新，expected_sha防并发，不改main/karl，不强推。
+- 新增reports/freesurfer_preparation_status.json；更新docs/STEP2C_RUNBOOK.md追加实际准备结果并保留最初边界；追加本日志。真实影像、个人账号/许可、二进制截图不入Git。
+- 在已有Colab notebook新增并实际执行准备专用格（仅P1/P2/P3源码，无install/init/recon）：固定d8bdfa7a125c9153943081f436eaf13966fea65d代码及5文件SHA核验通过；2026-11-10T09:49:32Z实际资源2核/12.6714GiB/105.399GiB空闲/Ubuntu24.04，资源门槛BLOCKED。Drive raw T1和native intake SHA分别89ea431...af73b5、8e6d310...64dccb，与固定完整哈希一致；准备JSON持久复制与SHA读回通过。格正常结束，观察耗时1.122s；不把此耗时当成重建耗时。
+- Git远端回读确认CHG-0019 notebook字节与本地准备文件完全一致。通过Colab的Copy to Drive创建独立06_liyang_freesurfer_2c.ipynb副本并检查标题/内容；新副本尚未连接运行时，所有重建开关关闭。旧notebook的准备结果已保存；没有Run all或重跑2B。
+- 实际已完成源码/资源/输入/保存核验；未完成FreeSurfer安装、隔离QC依赖安装、个人许可上传、autorecon和任何真实stats/QC。当前资源不足且许可缺失，不能称环境ready。当前检查只适用于所连会话，不推测用户其他算力。
+- 验证：新增JSON可解析，文档/JSON EOF通过；本次纯记录更新未重复运行无关测试或训练。无本地checkout，不冒称git diff/status；对API发布文件白名单及保留基准tree进行了检查。
+- 回退：独立revert本次审计/文档追加并保留历史日志、源代码及所有Drive文件；不删除原始影像/先前结果或强推。
