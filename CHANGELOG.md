@@ -329,3 +329,13 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 未执行：下载/安装完整FreeSurfer、autorecon、真实82体积/eTIV、QC图生成、编码器或分类。候选依赖、实际耗时与质量仍待实跑。Notebook将在后续单独提交固定引用本源码提交，避免以可变分支作为执行来源。
 - 已检查发布白名单、EOF和语法；无本地git diff/status可报告。原始MRI、许可、权重、二进制图像和大日志不入Git。风险：Colab会话可中断，仅已完成阶段可归档恢复；资源门槛不保证运行成功；有限PNG不能替代完整体积/表面人工QC。
 - 回退：独立revert本次新增文件并追加日志，保留历史、Drive原始影像及前序结果；不清空数据或强推其他分支。
+
+
+## CHG-0019 — 新增固定源码快照的独立 2C Colab notebook
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者Codex；继续用户“准备跑前工作”要求。分支li-yang-preprocessing，基准d8bdfa7a125c9153943081f436eaf13966fea65d；GitHub API白名单新增notebooks/06_liyang_freesurfer_2c.ipynb及本日志。无本地checkout，不改main/karl，非强推。
+- Notebook固定引用CHG-0018源码提交d8bdfa7a125c9153943081f436eaf13966fea65d，并逐文件验证SHA-256；资源检查、Drive输入哈希读回、个人许可上传、官方安装、隔离QC环境、新run初始化、三段计算、QC、draft导出/人工接受、状态/恢复分别独立。安装、初始化、各重建阶段、最终接受、恢复默认关闭；不自动Run all、不用可变分支下载可执行代码、不接受许可或编造审核。
+- 原始首例与schema不变；输出仍原始82体积和独立eTIV，校正/缩放留给训练折内。个人许可不打印、不进入检查点或Git。
+- 实际验证：15个代码格AST语法检查通过；JSON/cell字段及空输出/空执行计数核对。Notebook没有写入伪造执行输出；真实软件安装/重建仍未执行。源码包的15项测试见CHG-0018，不将其冒称本Notebook完整Colab运行。
+- 限制：隔离QC环境和FreeSurfer完整安装需实机验证，Colab当前资源/个人许可仍有门槛；完整阶段归档仅在正常结束后生成。初始Notebook SHA-256 72090e230f126b7f2b82ed6c50fa7a286d71e669664cbd728beb40afd06ff280。
+- 回退：独立revert本Notebook新增，保留已发布源码、历史日志和所有Drive输入/结果，不覆盖旧Notebook或强推。
