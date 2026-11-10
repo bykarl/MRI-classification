@@ -350,3 +350,15 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 实际已完成源码/资源/输入/保存核验；未完成FreeSurfer安装、隔离QC依赖安装、个人许可上传、autorecon和任何真实stats/QC。当前资源不足且许可缺失，不能称环境ready。当前检查只适用于所连会话，不推测用户其他算力。
 - 验证：新增JSON可解析，文档/JSON EOF通过；本次纯记录更新未重复运行无关测试或训练。无本地checkout，不冒称git diff/status；对API发布文件白名单及保留基准tree进行了检查。
 - 回退：独立revert本次审计/文档追加并保留历史日志、源代码及所有Drive文件；不删除原始影像/先前结果或强推。
+
+
+## CHG-0021 — 个人许可上传验收与独立 FreeSurfer 软件安装入口
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者Codex；用户明确要求先完成个人许可和FreeSurfer安装/版本检查，暂不重建。分支li-yang-preprocessing，基准3a622777ce84fb05b1041b2532700267fef2b7de。API白名单发布，无本地checkout，仅更新本分支，不改main/karl，不强推。
+- 新增scripts/install_freesurfer_software.py、docs/FREESURFER_SOFTWARE_INSTALL.md；本日志追加。独立软件安装不挂载Drive或读取患者输入；完整重建原预检不改、不绕过。源码固定核验P1快照/版本/包MD5，资源与许可文件检查，官方DEB+apt安装、版本/关键共享库/fsaverage检查，状态和完成/失败记录。
+- 个人许可：经用户在许可申请确认问题后回复继续，官方页面实际确认申请成功。随后用户又提供license.txt附件。最终通过Colab左侧文件面板成功上传，内核实测文件存在且非空，内容不打印/不进Git/不写入公开日志；不发布账号、许可编号/密钥、原始MRI。P4输出上传器多次超时，曾手动中断等待、重启Python内核并恢复固定源码；不把这些故障写成安装失败或重建失败。
+- 实际2026-11-10T15:24:19Z重新资源检查：8逻辑CPU、50.990276GiB有效RAM、225.734875GiB本地空闲、Ubuntu24.04、AVX通过。Drive最后OAuth点击自动安全审查拒绝，未授予九项账号权限；只读权限展开后，保留等待用户明确确认。不通过其他路径读取被拦截Drive。
+- 软件安装属于未受影响的独立工作。专用后台worker于2026-11-10T15:33:57Z启动，PID73397，运行目录/content/FYP_MRI_LiYang/software_install/install_20261110T153357Z；执行源码SHA-256 9cf3a2a1da845193dd221d9305d6fc467fef46d9f77d08dbdd4751cbbc5b3ca9。首次进度读取phase=downloading_official_package，已下载0.795GiB；未预写版本检查通过。
+- 验证：新脚本与Colab启动格AST通过，脚本py_compile通过；实际worker资源/许可/源码检查后开始curl官方包。没有运行模拟安装来冒充实测。完整安装、包SHA、版本与共享库结果待worker完成另行记录；没有运行C0/C1/C2/C3、真实体积/QC、编码器、训练或无关测试。
+- Colab专用启动格/只读状态格不含license；有防重复安装记录、独立PID/log/state，原P5关闭，不能两入口并发。软件验收与患者预检分开，不把软件完成当2C完成。当前结果仅临时运行时，Drive持久读回尚未进行。
+- 发布白名单/EOF/语法检查，保留基准tree与全部历史；没有本地git diff/status可报告。回退使用独立revert新增入口/文档并追加记录，保留许可证/原始影像/历史产物，不清空Drive、不强推。
