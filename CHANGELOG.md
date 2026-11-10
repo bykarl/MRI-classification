@@ -316,3 +316,16 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 验证范围：三个处理/导出/预览脚本 AST/py_compile 通过，新增文本 EOF/空白检查通过；预览和导出均有真实成功运行。新增公开源码与元数据检查，不发布 MRI/PNG、模型或凭据。未额外运行无关合成测试、编码器特征、正式训练、FreeSurfer 或 fMRI 处理。
 - 剩余边界：2B 技术图像处理完成；input_recipe_confirmed=false、qc_status=pending、training_ready=false 保留。需队友输入配方接受及后续人工 QC 才能标 T1 正式 ready；身份/诊断时点也未验证。2C、2D 及整个 MRI branch 预处理未完成。
 - 回退：用独立 revert 撤销本条新增/更新的说明、工具或小型记录；保留 CHG-0016、前序源码、实际各尝试和原始 MRI/私人 Drive。不删除历史数据、覆盖不同 checkpoint 或强推其他分支。
+
+
+## CHG-0018 — 准备首例 FreeSurfer 分段执行和结构体积交接代码
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者 Codex；用户要求自行操作 Colab，先准备跑前工作。分支 li-yang-preprocessing；基准 e2938437a247fb46546ae0e724137cb0b54c4a65。通过 GitHub API 读取固定基准并创建新 tree，无本地 checkout；仅更新本分支，expected_sha 防并发覆盖，不改 main/karl，不强推。
+- 新增 configs/freesurfer_pilot.json、scripts/freesurfer_pilot.py、scripts/freesurfer_volumes.py、scripts/freesurfer_qc.py、tests/test_freesurfer_preparation.py、docs/STEP2C_RUNBOOK.md。输入固定原生 intake_v2 T1 SHA，而非 2B 模板空间/去颅骨图。候选固定官方 FreeSurfer 8.2.0、FS_V8_XOPTS=0，Ubuntu22/24官方包及MD5；保守有效内存30GiB、磁盘40GiB门槛。安装需用户本人许可和显式接受，不提供或公开许可。
+- 三段 autorecon1/2/3 单独执行、完整subject归档、Drive复制读回、不可变运行记录、按相同build/OS/config恢复已完成检查点至新run。QC叠图保持pending；导出68皮层+14皮层下原始mm³体积及独立eTIV/raw stats；不提前ICV校正/缩放。人工审核和全项目通用pipeline_id明确后才允许正式structure交接，training_ready仍false。
+- 与固定karl接口a911ab6b2120698fdf48f1936c7bf7c5c1a17a4a核对82列顺序、stats读取及CSV门槛，schema SHA为5a2fffd7404afa7b7e8e6302d6c76593985317fd49d60128d0b9c747fc4b0c99。没有改动原schema或队友源码。
+- 实际验证：本地执行 python -m unittest discover -s tests -p test_freesurfer_preparation.py -q，15项合成测试通过（2026-11-10复验0.022s），包括与现有读取器逐值一致、缺失/重复/别名/单位拒绝、低内存/许可/阶段/归档路径保护、不能自动QC通过及恢复原归档归属。语法检查通过。测试不含真实MRI、FreeSurfer安装或模型推理；本地临时peer源码仅用于验证，不作为本次新增文件发布。
+- Colab只读资源检查于2026-11-10T09:44:06Z实际执行：2逻辑CPU、12.67GiB RAM、105.4GiB本地空闲、Ubuntu24.04.5、未检测nvidia-smi；Drive已挂载，native T1存在，/content/license.txt不存在。属于此刻打开会话，不推测用户其他会话；未对输入做新的哈希验收。运行前条件尚未齐备。
+- 未执行：下载/安装完整FreeSurfer、autorecon、真实82体积/eTIV、QC图生成、编码器或分类。候选依赖、实际耗时与质量仍待实跑。Notebook将在后续单独提交固定引用本源码提交，避免以可变分支作为执行来源。
+- 已检查发布白名单、EOF和语法；无本地git diff/status可报告。原始MRI、许可、权重、二进制图像和大日志不入Git。风险：Colab会话可中断，仅已完成阶段可归档恢复；资源门槛不保证运行成功；有限PNG不能替代完整体积/表面人工QC。
+- 回退：独立revert本次新增文件并追加日志，保留历史、Drive原始影像及前序结果；不清空数据或强推其他分支。

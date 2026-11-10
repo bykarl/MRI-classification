@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "record_id": "sub-mindo304_ses-placebo",
+  "subject_id": "sub-mindo304_ses-placebo",
+  "project_root": "/content/FYP_MRI_LiYang",
+  "persistent_root": "/content/drive/MyDrive/FYP_MRI_LiYang",
+  "raw_relative": "dataset_Mi/rawdata/sub-mindo304/ses-placebo/anat/sub-mindo304_ses-placebo_T1w.nii.gz",
+  "raw_sha256": "89ea431ba0e912d1b73643a4ce691dbe13ad54da394b645942e4e12dceaf73b5",
+  "input_relative": "intake_v2/t1/sub-mindo304_ses-placebo_T1w.nii.gz",
+  "input_sha256": "8e6d3104d6171e3528aefe6288357f8cfee97724f0044232bac7c2fd3641dccb",
+  "input_description": "Native-resolution header-harmonized intake copy; all raw voxels preserved; NOT the 2B N4/registered/skull-stripped image",
+  "freesurfer_version": "8.2.0",
+  "freesurfer_home": "/usr/local/freesurfer/8.2.0",
+  "fs_license": "/content/license.txt",
+  "recipe_id": "fs820_legacy_native_v1",
+  "FS_V8_XOPTS": "0",
+  "minimum_memory_gib": 30.0,
+  "minimum_free_disk_gib": 40.0,
+  "openmp_threads": 2,
+  "peer_commit": "a911ab6b2120698fdf48f1936c7bf7c5c1a17a4a",
+  "volume_schema_sha256": "5a2fffd7404afa7b7e8e6302d6c76593985317fd49d60128d0b9c747fc4b0c99",
+  "packages": {
+    "22.04": {
+      "url": "https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/8.2.0/freesurfer_ubuntu22-8.2.0_amd64.deb",
+      "md5": "9d49daaf41a1689b7d3c3817074a561a"
+    },
+    "24.04": {
+      "url": "https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/8.2.0/freesurfer_ubuntu24-8.2.0_amd64.deb",
+      "md5": "9f04a1b93ce4789ab04f3dd68e26a2fe"
+    }
+  }
+}
