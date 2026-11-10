@@ -1,0 +1,74 @@
+{
+  "installation": {
+    "started_at_utc": "2026-11-10T15:33:57.956145+00:00",
+    "source_commit": "d8bdfa7a125c9153943081f436eaf13966fea65d",
+    "installer_sha256": "9cf3a2a1da845193dd221d9305d6fc467fef46d9f77d08dbdd4751cbbc5b3ca9",
+    "reconstruction_started": false,
+    "drive_accessed": false,
+    "patient_inputs_checked": false,
+    "qc_status": "pending",
+    "training_ready": false,
+    "phase": "completed",
+    "updated_at_utc": "2026-11-10T15:54:40.921749+00:00",
+    "runtime": {
+      "checked_at_utc": "2026-11-10T15:33:57.956883+00:00",
+      "os_id": "ubuntu",
+      "os_version": "24.04",
+      "architecture": "x86_64",
+      "cpu_count": 8,
+      "effective_memory_gib": 50.99027633666992,
+      "available_memory_gib": 49.58037185668945,
+      "free_disk_gib": 225.73472213745117,
+      "avx_present": true,
+      "python": "3.13.18"
+    },
+    "license_file_present": true,
+    "package_path": "/content/FYP_MRI_LiYang/step2c_downloads/freesurfer_ubuntu24-8.2.0_amd64.deb",
+    "partial_path": "/content/FYP_MRI_LiYang/step2c_downloads/freesurfer_ubuntu24-8.2.0_amd64.deb.partial",
+    "official_url": "https://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/8.2.0/freesurfer_ubuntu24-8.2.0_amd64.deb",
+    "official_md5": "9f04a1b93ce4789ab04f3dd68e26a2fe",
+    "package_bytes": 8874692082,
+    "package_sha256": "a52996ed5147e5b7f1bd537c8405537cc2b133ae7075616b0c38975986a236a6",
+    "software_checks": "pass",
+    "fingerprint": {
+      "version_output": "freesurfer-linux-ubuntu24_x86_64-8.2.0-20260314-d932c45",
+      "recon_all_sha256": "045d853e05696ca91f8b080861dda4a12eea9867c2d567d00b7e14e1ec10bcf1",
+      "build_stamp_sha256": "441c4eee7141c4769293419589654a2a5b01731cbe0acbda49a109b7c86abce0",
+      "os_id": "ubuntu",
+      "os_version": "24.04",
+      "FS_V8_XOPTS": "0"
+    },
+    "finished_at_utc": "2026-11-10T15:54:40.921725+00:00",
+    "note": "Software checks only; patient preflight/QC remain pending"
+  },
+  "vendor_license_probe": {
+    "checked_at_utc": "2026-11-10T15:55:28.772502+00:00",
+    "software_checks": "pass",
+    "license_file_present": true,
+    "licensed_vendor_template_conversion": "pass",
+    "probe_input": "FreeSurfer vendor fsaverage/mri/T1.mgz",
+    "probe_input_sha256": "0c48dcfcd0cc218b9bde3b471e49eea84b00a38f4c0a4cf34bfbbe066091290f",
+    "probe_output_sha256": "0bd19df647f004e2bb3eb2ef69850329380e3a6fe038e35c5034c8fee5fa29af",
+    "output_shape": [
+      256,
+      256,
+      256
+    ],
+    "fingerprint": {
+      "version_output": "freesurfer-linux-ubuntu24_x86_64-8.2.0-20260314-d932c45",
+      "recon_all_sha256": "045d853e05696ca91f8b080861dda4a12eea9867c2d567d00b7e14e1ec10bcf1",
+      "build_stamp_sha256": "441c4eee7141c4769293419589654a2a5b01731cbe0acbda49a109b7c86abce0",
+      "os_id": "ubuntu",
+      "os_version": "24.04",
+      "FS_V8_XOPTS": "0"
+    },
+    "patient_inputs_checked": false,
+    "drive_accessed": false,
+    "reconstruction_started": false,
+    "qc_status": "pending",
+    "training_ready": false
+  },
+  "drive_authorization": "pending_explicit_user_confirmation_of_nine_scopes",
+  "patient_reconstruction_started": false,
+  "patient_inputs_current_session_checked": false
+}

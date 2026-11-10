@@ -362,3 +362,16 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 验证：新脚本与Colab启动格AST通过，脚本py_compile通过；实际worker资源/许可/源码检查后开始curl官方包。没有运行模拟安装来冒充实测。完整安装、包SHA、版本与共享库结果待worker完成另行记录；没有运行C0/C1/C2/C3、真实体积/QC、编码器、训练或无关测试。
 - Colab专用启动格/只读状态格不含license；有防重复安装记录、独立PID/log/state，原P5关闭，不能两入口并发。软件验收与患者预检分开，不把软件完成当2C完成。当前结果仅临时运行时，Drive持久读回尚未进行。
 - 发布白名单/EOF/语法检查，保留基准tree与全部历史；没有本地git diff/status可报告。回退使用独立revert新增入口/文档并追加记录，保留许可证/原始影像/历史产物，不清空Drive、不强推。
+
+
+## CHG-0022 — FreeSurfer 8.2.0 安装与个人许可实测通过
+
+- 时间：2026-11-10（Asia/Shanghai）；执行者Codex；继续已授权的软件准备，未启动重建。分支li-yang-preprocessing，基准6836b093ddddcc251e0a1a8bee761e540cb2143e。API白名单发布，无本地checkout，仅本分支expected_sha更新，不改main/karl、不强推。
+- 新增scripts/verify_freesurfer_software.py、reports/freesurfer_software_verification.json；更新docs/FREESURFER_SOFTWARE_INSTALL.md追加最终实测；本日志追加。许可密钥、MRI、安装包/日志、模板探针二进制、截图不入Git。
+- 实际软件安装run=install_20261110T153357Z，2026-11-10T15:54:40.921725Z完成（23:54:40 Asia/Shanghai）。官方Ubuntu24 8.2.0 DEB 8,874,692,082 bytes，MD5 9f04a1b93ce4789ab04f3dd68e26a2fe核对通过，SHA-256 a52996ed5147e5b7f1bd537c8405537cc2b133ae7075616b0c38975986a236a6。通过apt完整安装，不是仅解包或伪造版本。
+- 实际版本freesurfer-linux-ubuntu24_x86_64-8.2.0-20260314-d932c45；recon-all源码SHA045d853e05696ca91f8b080861dda4a12eea9867c2d567d00b7e14e1ec10bcf1，build-stamp SHA441c4eee7141c4769293419589654a2a5b01731cbe0acbda49a109b7c86abce0。recon-all -version、mri_convert --version、mri_ca_register/mri_watershed/mris_register/mris_make_surfaces共享库检查、fsaverage目录检查通过，FS_V8_XOPTS=0。
+- 实际许可小测试于2026-11-10T15:55:28Z完成：mri_convert处理随软件附带fsaverage/mri/T1.mgz，退出码0，输出gzip NIfTI-1 header与256×256×256尺寸检查通过。输入SHA0c48dcfcd0cc218b9bde3b471e49eea84b00a38f4c0a4cf34bfbbe066091290f，输出SHA0bd19df647f004e2bb3eb2ef69850329380e3a6fe038e35c5034c8fee5fa29af。测试不读患者数据、不启动recon-all；不是分割/分类结果。验证脚本SHA9fa07c9c47ab76250675b36f937c0b8c30ef4fb1e91235c24f4e4130ab1a6faf，AST/py_compile通过。
+- 完成JSON由实际worker产生；最终汇总格读回completed.json与verification.json并断言pass，页面输出的完整小型JSON取回后再次解析核对两项pass。报表不含许可内容、账号或患者影像；只报告软件验收。原P5默认关闭，专用安装已完成，勿重复启动。
+- apt期间出现Colab预置/usr/local/lib部分库非符号链接的ldconfig提示；安装正常结束，后续关键共享库与真实模板转换通过；未为消除提示修改系统安全策略或执行可变远程补丁。
+- 剩余：Drive九项账号权限授权仍被自动安全审查拦截，未通过其他路径访问Drive。当前软件/许可/大日志在Colab临时运行时，尚未做Drive持久读回；Git保存源码和验收元数据。患者输入本会话未核验，C0/C1/C2/C3、真实体积/ICV/QC、编码器与分类均未运行，training_ready=false。
+- 检查白名单/EOF/空白/JSON与真实退出结果，无本地git diff/status可报告。回退以独立revert撤销本次新增验证入口/元数据/文档追加并保留日志历史和用户文件；不清空Drive/原始MRI、不强推、不把软件完成冒称2C整体完成。
