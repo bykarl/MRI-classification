@@ -386,3 +386,11 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - 实际隔离QC环境numpy1.26.4/nibabel5.3.2/matplotlib3.9.4安装。首轮import因继承Colab MPLBACKEND=matplotlib_inline失败；仅在QC子进程设置MPLBACKEND=Agg后imports与backend断言通过，freeze已持久复制和SHA读回。Live notebook修复已实际执行；完整notebook源码和最终就绪结果待后续条目发布。
 - 验证：新准备脚本py_compile与AST通过；静态核查没有execute_stage直接调用。新脚本真实完整验收尚未执行（等待软件安装），不得声称已初始化run/产生输入预览或ready报告。本次没有运行合成数据冒充患者结果，没有运行C1/C2/C3、编码器或训练。
 - 保留所有历史和患者数据，许可/原始影像/截图/大日志不入Git；发布文件仅新脚本与本日志。无本地git diff/status可报告。回退用独立revert撤销本次新增入口并追加日志，不删除Drive原始数据、不强推。
+
+
+## CHG-0024 — 修复通用QC后端与个人许可检查入口
+
+- 时间：2026-11-11（Asia/Shanghai）；执行者Codex；继续已授权的跑前准备。分支li-yang-preprocessing，基准d9a6b91f091aeb9278d2c5b5f4437f8fdb4bc1c0；API仅本分支expected_sha更新，无本地checkout，不改main/karl、不强推。
+- 仅更新notebooks/06_liyang_freesurfer_2c.ipynb的通用P4/P6入口及本日志：P4用文件面板上传后检查既有许可，避免失效输出iframe上传器；P6仅在QC子进程设置MPLBACKEND=Agg，保留固定依赖和freeze持久读回。未改病例、输入、重建、QC接受或模型方法；代码输出/执行计数为空。
+- 实际验证：隔离依赖导入与Agg backend断言通过，软件许可执行验证通过。源码JSON/代码AST、空输出及原有关闭重建开关检查；未对整理后的整个notebook另做全新运行时端到端复跑。病例关联的验收JSON、影像、预览和运行路径不在本次发布文件中；实际运行记录留在既有项目Drive，不新增病例元数据至GitHub。
+- 本次无训练、分类或重建结果发布；环境就绪与真实重建/人工QC分开。无本地git diff/status可报告；API白名单仅notebook及日志。回退用独立revert本次两项通用入口修复并追加日志，保留原始影像、许可、私有运行记录和全部历史，不删除用户数据、不强推。
