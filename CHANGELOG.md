@@ -375,3 +375,14 @@ CHG-0007 哈希格式补充：临时安装 Notebook 的连续 SHA-256 为 `0f68a
 - apt期间出现Colab预置/usr/local/lib部分库非符号链接的ldconfig提示；安装正常结束，后续关键共享库与真实模板转换通过；未为消除提示修改系统安全策略或执行可变远程补丁。
 - 剩余：Drive九项账号权限授权仍被自动安全审查拦截，未通过其他路径访问Drive。当前软件/许可/大日志在Colab临时运行时，尚未做Drive持久读回；Git保存源码和验收元数据。患者输入本会话未核验，C0/C1/C2/C3、真实体积/ICV/QC、编码器与分类均未运行，training_ready=false。
 - 检查白名单/EOF/空白/JSON与真实退出结果，无本地git diff/status可报告。回退以独立revert撤销本次新增验证入口/元数据/文档追加并保留日志历史和用户文件；不清空Drive/原始MRI、不强推、不把软件完成冒称2C整体完成。
+
+
+## CHG-0023 — Drive挂载及首例完整准备验收入口
+
+- 时间：2026-11-11（Asia/Shanghai）；执行者Codex；用户要求一次性完成2C所有跑前准备，暂不启动重建。分支li-yang-preprocessing，基准a5d49459d4bd8aa7a1c6acc9482ea4605886204f；通过GitHub API白名单发布，无本地checkout，仅本分支expected_sha更新，不改main/karl、不强推。
+- 新增scripts/prepare_freesurfer_case.py：核对固定源码/schema、完整软件/许可/输入预检、已完成安装与模板探针证据、QC依赖和CLI导入、真实native T1读取/有限值/可逆affine、仅输入预览；初始化唯一run并复制输入与元数据，通过Drive SHA读回。备份小型源码/软件验收证据，输出readiness.json，明确不调用任何重建阶段、不批准QC，不备份个人许可/软件树/安装包。
+- 实际Drive授权已在用户了解九项权限并明确确认后完成；Colab输出Mounted at /content/drive，原始T1 SHA89ea431ba0e912d1b73643a4ce691dbe13ad54da394b645942e4e12dceaf73b5与native T1 SHA8e6d3104d6171e3528aefe6288357f8cfee97724f0044232bac7c2fd3641dccb通过，准备JSON保存和读回成功。未访问无关Drive文件。
+- Colab运行时已重置，不能沿用CHG-0022的软件就绪结论。当前8核/50.99GiB/Ubuntu24.04检查通过，许可从用户既有附件恢复至/content/license.txt，未打印内容。相同软件安装器于2026-11-11T04:40:07Z启动，PID5994；本条发布时仍下载官方包，尚未重新验收软件通过。
+- 实际隔离QC环境numpy1.26.4/nibabel5.3.2/matplotlib3.9.4安装。首轮import因继承Colab MPLBACKEND=matplotlib_inline失败；仅在QC子进程设置MPLBACKEND=Agg后imports与backend断言通过，freeze已持久复制和SHA读回。Live notebook修复已实际执行；完整notebook源码和最终就绪结果待后续条目发布。
+- 验证：新准备脚本py_compile与AST通过；静态核查没有execute_stage直接调用。新脚本真实完整验收尚未执行（等待软件安装），不得声称已初始化run/产生输入预览或ready报告。本次没有运行合成数据冒充患者结果，没有运行C1/C2/C3、编码器或训练。
+- 保留所有历史和患者数据，许可/原始影像/截图/大日志不入Git；发布文件仅新脚本与本日志。无本地git diff/status可报告。回退用独立revert撤销本次新增入口并追加日志，不删除Drive原始数据、不强推。
